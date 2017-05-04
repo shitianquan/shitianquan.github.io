@@ -100,7 +100,7 @@
 <meta property="og:description" content="脏读 不可重复读 幻读脏读A事务访问数据并修改数据,事务未提交时B事务来读取已修改的数据.A事务回滚,放弃修改,那么B事务读到的就是脏数据
 不可重复读A事务第一次读取数据(比如前10条)B事务update第1条数据,commitA事务第二次读取数据(前10条),和第一次读取有差异
 幻读A事务第一次读取全部数据行(共10条)B事务insert一条数据,commitA事务第二次读取全部数据行(共11条">
-<meta property="og:updated_time" content="2017-05-04T01:32:47.624Z">
+<meta property="og:updated_time" content="2017-05-04T02:14:16.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="interview-数据库">
 <meta name="twitter:description" content="脏读 不可重复读 幻读脏读A事务访问数据并修改数据,事务未提交时B事务来读取已修改的数据.A事务回滚,放弃修改,那么B事务读到的就是脏数据
@@ -457,6 +457,7 @@
 <li><code>IS NULL</code>和<code>IS NOT NULL</code></li>
 <li>使用<code>函数</code></li>
 <li><code>类型转换</code></li>
+<li>使用<code>后模糊</code> %XXX 不走索引, XXX%走索引</li>
 </ul>
 
       
