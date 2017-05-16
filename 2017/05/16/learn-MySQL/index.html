@@ -1,0 +1,773 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="SQL,MySQL," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="时间,日期操作12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576-- 1.当前时间戳, 日期, 时间SELECTNOW(),				-- 2017-05-15 18">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL基础-MySQL">
+<meta property="og:url" content="http://yoursite.com/2017/05/16/learn-MySQL/index.html">
+<meta property="og:site_name" content="Terry">
+<meta property="og:description" content="时间,日期操作12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576-- 1.当前时间戳, 日期, 时间SELECTNOW(),				-- 2017-05-15 18">
+<meta property="og:updated_time" content="2017-05-16T06:14:07.306Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL基础-MySQL">
+<meta name="twitter:description" content="时间,日期操作12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576-- 1.当前时间戳, 日期, 时间SELECTNOW(),				-- 2017-05-15 18">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/16/learn-MySQL/"/>
+
+
+
+
+
+  <title>SQL基础-MySQL | Terry</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Terry</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/16/learn-MySQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Terry Shi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/me/onepiece.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Terry">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                SQL基础-MySQL
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-16T14:04:54+08:00">
+                2017-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="时间-日期操作"><a href="#时间-日期操作" class="headerlink" title="时间,日期操作"></a>时间,日期操作</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- 1.当前时间戳, 日期, 时间</span></div><div class="line"><span class="keyword">SELECT</span></div><div class="line"><span class="keyword">NOW</span>(),				<span class="comment">-- 2017-05-15 18:03:24</span></div><div class="line"><span class="keyword">CURDATE</span>(),			<span class="comment">-- 2017-05-15</span></div><div class="line"><span class="keyword">CURRENT_TIMESTAMP</span>,  <span class="comment">-- 2017-05-15 18:03:24</span></div><div class="line"><span class="keyword">CURRENT_DATE</span>, 		<span class="comment">-- 2017-05-15</span></div><div class="line"><span class="keyword">CURRENT_TIME</span>		<span class="comment">-- 18:03:24</span></div><div class="line">;</div><div class="line"></div><div class="line"><span class="comment">-- 2.时间加减 date_add, date_sub</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">NOW</span>(),</div><div class="line"><span class="keyword">date_add</span>(<span class="keyword">NOW</span>(), <span class="built_in">INTERVAL</span> <span class="number">1</span> <span class="keyword">YEAR</span>),	<span class="comment">-- 年</span></div><div class="line"><span class="keyword">date_add</span>(<span class="keyword">NOW</span>(), <span class="built_in">INTERVAL</span> <span class="number">1</span> <span class="keyword">MONTH</span>),	<span class="comment">-- 月</span></div><div class="line"><span class="keyword">date_add</span>(<span class="keyword">NOW</span>(), <span class="built_in">INTERVAL</span> <span class="number">1</span> <span class="keyword">DAY</span>),	<span class="comment">-- 天</span></div><div class="line"><span class="keyword">date_add</span>(<span class="keyword">NOW</span>(), <span class="built_in">INTERVAL</span> <span class="number">1</span> <span class="keyword">HOUR</span>),	<span class="comment">-- 小时</span></div><div class="line"><span class="keyword">date_add</span>(<span class="keyword">NOW</span>(), <span class="built_in">INTERVAL</span> <span class="number">1</span> <span class="keyword">MINUTE</span>),	<span class="comment">-- 分钟</span></div><div class="line"><span class="keyword">date_add</span>(<span class="keyword">NOW</span>(), <span class="built_in">INTERVAL</span> <span class="number">1</span> <span class="keyword">SECOND</span>),	<span class="comment">-- 秒</span></div><div class="line"><span class="keyword">date_add</span>(<span class="keyword">NOW</span>(), <span class="built_in">interval</span> <span class="string">'01:30'</span> HOUR_MINUTE),</div><div class="line"><span class="keyword">date_add</span>(<span class="keyword">NOW</span>(), <span class="built_in">interval</span> <span class="string">'01:30:30'</span> HOUR_SECOND)</div><div class="line">;</div><div class="line"><span class="keyword">select</span> <span class="keyword">date_add</span>(<span class="keyword">curdate</span>(),<span class="built_in">interval</span> -<span class="keyword">day</span>(<span class="keyword">curdate</span>())+<span class="number">1</span> <span class="keyword">day</span>)   <span class="comment">-- 获取本月第一天</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">last_day</span>(<span class="keyword">curdate</span>());   <span class="comment">-- 获取当月最后一天</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">date_add</span>(<span class="keyword">last_day</span>(<span class="keyword">curdate</span>()), <span class="built_in">interval</span> <span class="number">1</span> <span class="keyword">day</span>);   <span class="comment">-- 获取下月第一天</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">-- 3.日期处于年,月,星期的第几天</span></div><div class="line"><span class="keyword">SELECT</span></div><div class="line"><span class="keyword">CURRENT_TIMESTAMP</span>,</div><div class="line"><span class="keyword">DAYOFYEAR</span>(<span class="keyword">NOW</span>()),</div><div class="line"><span class="keyword">DAYOFMONTH</span>(<span class="keyword">NOW</span>()),</div><div class="line"><span class="keyword">DAYOFWEEK</span>(<span class="keyword">NOW</span>()),	<span class="comment">-- WEEK从周日开始, 周一返回的值是2</span></div><div class="line"><span class="keyword">DAYNAME</span>(<span class="keyword">NOW</span>()),		<span class="comment">-- 周一返回, Monday.</span></div><div class="line">MONTHNAME(<span class="keyword">NOW</span>())	<span class="comment">-- 五月返回, May</span></div><div class="line">;</div><div class="line"></div><div class="line"><span class="comment">-- 4. 截取时间的某个字段</span></div><div class="line"><span class="keyword">SELECT</span></div><div class="line"><span class="keyword">NOW</span>(),</div><div class="line"><span class="keyword">YEAR</span>(<span class="keyword">NOW</span>()),</div><div class="line"><span class="keyword">QUARTER</span>(<span class="keyword">NOW</span>()),</div><div class="line"><span class="keyword">WEEK</span>(<span class="keyword">NOW</span>()),</div><div class="line"><span class="keyword">MONTH</span>(<span class="keyword">NOW</span>()),</div><div class="line"><span class="keyword">DAY</span>(<span class="keyword">NOW</span>()),</div><div class="line"><span class="keyword">HOUR</span>(<span class="keyword">NOW</span>()),</div><div class="line"><span class="keyword">MINUTE</span>(<span class="keyword">NOW</span>()),</div><div class="line"><span class="keyword">SECOND</span>(<span class="keyword">NOW</span>())</div><div class="line">;</div><div class="line"></div><div class="line"><span class="comment">-- 5.时间/日期 格式化</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">NOW</span>(), <span class="keyword">DATE_FORMAT</span>(<span class="keyword">NOW</span>(),<span class="string">'%Y-%m-%d'</span>);	<span class="comment">-- 日期格式化 2017-05-16 14:01:49	 2017-05-16</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">NOW</span>(), <span class="keyword">TIME_FORMAT</span>(<span class="keyword">NOW</span>(),<span class="string">'%H:%i:%s'</span>);	<span class="comment">-- 时间格式化 2017-05-16 14:01:38  14:01:38</span></div><div class="line"></div><div class="line"><span class="comment">-- 6. 时间转换</span></div><div class="line"><span class="comment">-- 6.1 日期转字符串</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">NOW</span>(), <span class="keyword">DATE_FORMAT</span>(<span class="keyword">NOW</span>(),<span class="string">'%Y-%m-%d %H:%i:%s'</span>);	<span class="comment">-- %H 24小时制, %p pm,am</span></div><div class="line"><span class="comment">-- 6.2 字符串转日期</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">timestamp</span>(<span class="string">'20160101'</span>);						    <span class="comment">-- 2016-01-01 00:00:00</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">timestamp</span>(<span class="string">'2016-01-01 10:30'</span>);				    <span class="comment">-- 2016-01-01 10:30:00</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">str_to_date</span>(<span class="string">'2016-01-02'</span>, <span class="string">'%Y-%m-%d'</span>); 	 		<span class="comment">-- 2016-01-02</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">str_to_date</span>(<span class="string">'2016-01-02 12:11'</span>, <span class="string">'%Y-%m-%d %H'</span>);  <span class="comment">-- 2016-01-02 00:00:00</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">str_to_date</span>(<span class="string">'2016-01-02 12:11'</span>, <span class="string">'%Y-%m-%d %T'</span>);  <span class="comment">-- 2016-01-02 12:11:00</span></div><div class="line"><span class="comment">-- 6.3 unix 时间戳 互转</span></div><div class="line"><span class="keyword">SELECT</span> FROM_UNIXTIME( <span class="number">1483200000</span>, <span class="string">'%Y%m%d'</span> );</div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">UNIX_TIMESTAMP</span>(<span class="string">'2017-01-01'</span>);</div><div class="line"><span class="comment">-- 6.4 maketime</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">makedate</span>(<span class="number">2001</span>,<span class="number">31</span>); <span class="comment">-- '2001-01-31'</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">makedate</span>(<span class="number">2001</span>,<span class="number">32</span>); <span class="comment">-- '2001-02-01'</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">maketime</span>(<span class="number">12</span>,<span class="number">15</span>,<span class="number">30</span>); <span class="comment">-- '12:15:30'</span></div><div class="line"></div><div class="line"><span class="comment">-- 7.时间差计算</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">DATEDIFF</span>(<span class="string">'2017-05-16'</span>,<span class="string">'2017-05-10'</span>); <span class="comment">-- 6</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">TIMEDIFF</span>(<span class="string">'2017-05-16 12:00:00'</span>,<span class="string">'2017-05-16 11:00:00'</span>); <span class="comment">-- 01:00:00</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">HOUR</span>(<span class="keyword">TIMEDIFF</span>(<span class="string">'2017-05-16 12:00:00'</span>,<span class="string">'2017-05-16 11:00:00'</span>)); <span class="comment">-- 1</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">timestampdiff</span>(<span class="keyword">year</span>,<span class="string">'2002-05-01'</span>,<span class="string">'2001-01-01'</span>); <span class="comment">-- -1</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">timestampdiff</span>(<span class="keyword">day</span> ,<span class="string">'2002-05-01'</span>,<span class="string">'2001-01-01'</span>); <span class="comment">-- -485</span></div><div class="line"><span class="keyword">select</span> <span class="keyword">timestampdiff</span>(<span class="keyword">hour</span>,<span class="string">'2008-08-08 12:00:00'</span>,<span class="string">'2008-08-08 00:00:00'</span>); <span class="comment">-- -12</span></div></pre></td></tr></table></figure>
+<h1 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">concat</span>(<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>) ;	<span class="comment">-- 拼接 abc</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">concat_ws</span>(<span class="string">','</span>,<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>) ;	<span class="comment">-- 拼接加间隔符 a,b,c</span></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">STRCMP</span>(<span class="string">'ab'</span>,<span class="string">'aa'</span>), <span class="string">'ab'</span> &gt; <span class="string">'aa'</span>; <span class="comment">-- 比较 1 1</span></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">LOWER</span>(<span class="string">'ABc'</span>), <span class="keyword">UPPER</span>(<span class="string">'abC'</span>); <span class="comment">-- 大小写转换, abc  ABC</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">replace</span>(<span class="string">'hello world hello'</span>, <span class="string">'hello'</span> ,<span class="string">'hi'</span>); <span class="comment">-- 替换 hi world hi</span></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">LTRIM</span>(<span class="string">'   abc  '</span>), <span class="keyword">RTRIM</span>(<span class="string">'   abc  '</span>), <span class="keyword">trim</span>(<span class="string">'   abc  '</span>);	<span class="comment">-- 去除空格</span></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">LEFT</span>(<span class="string">'abc'</span>,<span class="number">2</span>), <span class="keyword">right</span>(<span class="string">'abc'</span>,<span class="number">2</span>);	<span class="comment">-- 从左/右截取</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">MID</span>(<span class="string">'abcd'</span>,<span class="number">2</span>,<span class="number">2</span>);</div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">SUBSTRING</span>(<span class="string">'abcd'</span>,<span class="number">2</span>,<span class="number">2</span>);</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">LENGTH</span>(<span class="string">'abc'</span>);	<span class="comment">-- 长度, 3</span></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">POSITION</span>(<span class="string">'b'</span> <span class="keyword">IN</span> <span class="string">'abc'</span>), <span class="keyword">INSTR</span>(<span class="string">'abc'</span>,<span class="string">'b'</span>); <span class="comment">-- 查找第一次出现的位置, 2 2</span></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> FIND_IN_SET(<span class="string">'b'</span>,<span class="string">'a,b,c,d'</span>); <span class="comment">-- set以逗号为分隔符</span></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">repeat</span>(<span class="string">'ab'</span>, <span class="number">3</span>); <span class="comment">-- ababab</span></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">REVERSE</span>(<span class="string">'abc'</span>); <span class="comment">-- 反转 cba</span></div></pre></td></tr></table></figure>
+<h1 id="数字操作"><a href="#数字操作" class="headerlink" title="数字操作"></a>数字操作</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">RAND</span>(); <span class="comment">-- 随机数</span></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">round</span>(<span class="number">3.14</span>), <span class="keyword">round</span>(<span class="number">3.56</span>, <span class="number">1</span>); <span class="comment">-- 四舍五入 3 , 3.6</span></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">floor</span>(<span class="number">3.56</span>);	<span class="comment">-- 向下取整 3</span></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">CEIL</span>(<span class="number">3.56</span>);	<span class="comment">-- 向上取整 4</span></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">truncate</span>(<span class="number">3.146926</span>, <span class="number">2</span>); <span class="comment">-- 截取 3.14</span></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">greatest</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), <span class="keyword">least</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>); <span class="comment">-- 集合最大/小值</span></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">SIGN</span>(<span class="number">-10</span>), <span class="keyword">SIGN</span>(<span class="number">10</span>), <span class="keyword">SIGN</span>(<span class="number">0</span>); <span class="comment">-- 返回代表数字符号 -1 1 0</span></div></pre></td></tr></table></figure>
+<h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span></div><div class="line">(</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'aa'</span> <span class="keyword">as</span> <span class="keyword">col</span> <span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'bb'</span> <span class="keyword">as</span> <span class="keyword">col</span></div><div class="line">) <span class="keyword">as</span> t</div><div class="line"><span class="keyword">where</span> t.col REGEXP <span class="string">'^a'</span></div><div class="line">;</div></pre></td></tr></table></figure>
+<h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- 1.IF</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">IF</span>( <span class="number">1</span> &lt; <span class="number">0</span>,<span class="string">'T'</span>,<span class="string">'F'</span>); <span class="comment">-- 如果test是真，返回T；否则返回F</span></div><div class="line"></div><div class="line"><span class="comment">-- 2.IFNULL</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">IFNULL</span>(<span class="literal">NULL</span>,<span class="string">'str'</span>); <span class="comment">-- 如果arg1不是空，返回arg1，否则返回arg2</span></div><div class="line"></div><div class="line"><span class="comment">-- 3.NULLIF</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">NULLIF</span>(<span class="number">1</span>	,<span class="number">1</span>) ; <span class="comment">-- arg1 == arg2 ? NULL : arg1     NULL</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">NULLIF</span>(<span class="number">1</span>	,<span class="number">2</span>) ; <span class="comment">-- arg1 == arg2 ? NULL : arg1			1</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div></div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/reward/wx_pay.png" alt="Terry Shi WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQL/" rel="tag"># SQL</a>
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/23/interview-java基础/" rel="next" title="interview-java基础">
+                <i class="fa fa-chevron-left"></i> interview-java基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/me/onepiece.jpg"
+               alt="Terry Shi" />
+          <p class="site-author-name" itemprop="name">Terry Shi</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友链
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://jadyer.github.io/" title="玄玉" target="_blank">玄玉</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://binaryys.github.io/" title="松松哥" target="_blank">松松哥</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://calvin1978.blogcn.com/" title="Calvin" target="_blank">Calvin</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#时间-日期操作"><span class="nav-number">1.</span> <span class="nav-text">时间,日期操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串操作"><span class="nav-number">2.</span> <span class="nav-text">字符串操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数字操作"><span class="nav-number">3.</span> <span class="nav-text">数字操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则表达式"><span class="nav-number">4.</span> <span class="nav-text">正则表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用函数"><span class="nav-number">5.</span> <span class="nav-text">常用函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Terry Shi</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
