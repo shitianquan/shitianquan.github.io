@@ -91,24 +91,24 @@
 
 
 <meta name="description" content="何时进行回收一般来说，当某个区域内存不够的时候就会进行垃圾收集
-如何判断一块内存是垃圾?引用计数当有对象引用自身时，就会计数器加1，删除一个引用就减一，当计数为0时即可判断为垃圾.存在的问题:引用计数存在循环引用问题
-可达性分析(根搜索算法)通过一些根节点开始，分析引用链，没有被引用的对象都可以被标记为垃圾对象。JVM普遍采用该算法
-GC RootsJava虚拟机将以下对象定义为 GC Roots">
+
+young GC：当young gen中的eden区分配满的时候触发。注意young GC中有部分存活对象会晋升到old gen，所以young GC后old gen的占用量通常会有所升高。
+full GC：当准备要触发一次young GC时，如果发现统计数据说之前young GC的平均晋升大小比目前old gen剩余的空间大，则不">
 <meta property="og:type" content="article">
 <meta property="og:title" content="learn-jvm-3-垃圾回收">
 <meta property="og:url" content="http://yoursite.com/2017/03/08/learn-jvm-3-垃圾回收/index.html">
 <meta property="og:site_name" content="Terry">
 <meta property="og:description" content="何时进行回收一般来说，当某个区域内存不够的时候就会进行垃圾收集
-如何判断一块内存是垃圾?引用计数当有对象引用自身时，就会计数器加1，删除一个引用就减一，当计数为0时即可判断为垃圾.存在的问题:引用计数存在循环引用问题
-可达性分析(根搜索算法)通过一些根节点开始，分析引用链，没有被引用的对象都可以被标记为垃圾对象。JVM普遍采用该算法
-GC RootsJava虚拟机将以下对象定义为 GC Roots">
-<meta property="og:updated_time" content="2017-05-13T06:32:30.784Z">
+
+young GC：当young gen中的eden区分配满的时候触发。注意young GC中有部分存活对象会晋升到old gen，所以young GC后old gen的占用量通常会有所升高。
+full GC：当准备要触发一次young GC时，如果发现统计数据说之前young GC的平均晋升大小比目前old gen剩余的空间大，则不">
+<meta property="og:updated_time" content="2017-06-27T01:46:53.287Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="learn-jvm-3-垃圾回收">
 <meta name="twitter:description" content="何时进行回收一般来说，当某个区域内存不够的时候就会进行垃圾收集
-如何判断一块内存是垃圾?引用计数当有对象引用自身时，就会计数器加1，删除一个引用就减一，当计数为0时即可判断为垃圾.存在的问题:引用计数存在循环引用问题
-可达性分析(根搜索算法)通过一些根节点开始，分析引用链，没有被引用的对象都可以被标记为垃圾对象。JVM普遍采用该算法
-GC RootsJava虚拟机将以下对象定义为 GC Roots">
+
+young GC：当young gen中的eden区分配满的时候触发。注意young GC中有部分存活对象会晋升到old gen，所以young GC后old gen的占用量通常会有所升高。
+full GC：当准备要触发一次young GC时，如果发现统计数据说之前young GC的平均晋升大小比目前old gen剩余的空间大，则不">
 
 
 
@@ -375,6 +375,10 @@ GC RootsJava虚拟机将以下对象定义为 GC Roots">
 
       
         <h1 id="何时进行回收"><a href="#何时进行回收" class="headerlink" title="何时进行回收"></a>何时进行回收</h1><p>一般来说，当某个区域内存不够的时候就会进行垃圾收集</p>
+<ul>
+<li>young GC：当young gen中的eden区分配满的时候触发。注意young GC中有部分存活对象会晋升到old gen，所以young GC后old gen的占用量通常会有所升高。</li>
+<li>full GC：当准备要触发一次young GC时，如果发现统计数据说之前young GC的平均晋升大小比目前old gen剩余的空间大，<br>则不会触发young GC而是转为触发full GC（因为HotSpot VM的GC里，除了CMS的concurrent collection之外，其它能收集old gen的GC都会同时收集整个GC堆，包括young gen，所以不需要事先触发一次单独的young GC）；<br>或者，如果有perm gen的话，要在perm gen分配空间但已经没有足够空间时，也要触发一次full GC；<br>或者System.gc()、heap dump带GC，默认也是触发full GC。</li>
+</ul>
 <h1 id="如何判断一块内存是垃圾"><a href="#如何判断一块内存是垃圾" class="headerlink" title="如何判断一块内存是垃圾?"></a>如何判断一块内存是垃圾?</h1><h2 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h2><p>当有对象引用自身时，就会计数器加1，删除一个引用就减一，当计数为0时即可判断为垃圾.<br>存在的问题:引用计数存在循环引用问题</p>
 <h2 id="可达性分析-根搜索算法"><a href="#可达性分析-根搜索算法" class="headerlink" title="可达性分析(根搜索算法)"></a>可达性分析(根搜索算法)</h2><p>通过一些根节点开始，分析引用链，没有被引用的对象都可以被标记为垃圾对象。<br>JVM普遍采用该算法</p>
 <h3 id="GC-Roots"><a href="#GC-Roots" class="headerlink" title="GC Roots"></a>GC Roots</h3><p>Java虚拟机将以下对象定义为 GC Roots:</p>
